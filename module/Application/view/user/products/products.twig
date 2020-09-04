@@ -1,0 +1,58 @@
+{% extends 'layout/layout' %}
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center">Продукты юзера #{{ user.id }} {{ user.name }}</h1>
+            <table class="table table-bordered table-dark">
+                <tr>
+                    <th>#</th>
+
+                    <th>
+                        Продукт
+                    </th>
+                    <th>
+                        Цена
+                    </th>
+
+
+
+                </tr>
+                {% for item in products %}
+                    <tr>
+                        <td>{{ item.id}}</td>
+
+                        <td>{{ item.product.name}}</td>
+                        <td>{{ item.product.price}} Руб.</td>
+
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <nav aria-label="Page navigation " class="pagination">
+                <ul class="list-group">
+
+                    {% for item in pages.pagesInRange %}
+                        {% if pages.current == item %}
+
+                            <li class="page-item active">
+                              <span class="page-link">
+                                {{ item }}
+                                <span class="sr-only">(current)</span>
+                              </span>
+                            </li>
+                        {% else %}
+                            <li class="page-item"><a class="page-link" href="/user/{{user.id}}/products/{{item}}">{{ item }}</a></li>
+                        {% endif %}
+
+
+                    {% endfor %}
+
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+{% endblock %}

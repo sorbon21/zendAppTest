@@ -1,0 +1,53 @@
+{% extends 'layout/layout' %}
+{% block content %}
+    <a href="/users">Пользователи</a>
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center">Последние заказы юзеров</h1>
+            <table class="table table-bordered table-dark">
+                <tr>
+                    <th>
+                        Пользователь
+                    </th>
+                    <th>
+                        Продукт
+                    </th>
+                    <th>Дата добавления</th>
+                </tr>
+                {% for item in lastProducts %}
+                    <tr>
+                        <td>(<a href="/user/{{ item.user_id}}/products">{{ item.user_id}}</a>) {{ item.user_name}}</td>
+                        <td>({{ item.product_id}}) {{ item.product_name}}</td>
+                        <td>{{ item.dt_created }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <nav aria-label="Page navigation " class="pagination">
+                <ul class="list-group">
+
+                    {% for item in pages.pagesInRange %}
+                        {% if pages.current == item %}
+
+                            <li class="page-item active">
+                              <span class="page-link">
+                                {{ item }}
+                                <span class="sr-only">(current)</span>
+                              </span>
+                            </li>
+                        {% else %}
+                            <li class="page-item"><a class="page-link" href="/{{ item}}">{{ item }}</a></li>
+                        {% endif %}
+
+
+                    {% endfor %}
+
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+{% endblock %}

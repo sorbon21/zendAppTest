@@ -1,0 +1,21 @@
+{% extends 'layout/layout' %}
+{% block content %}
+    <a href="/user">Продукт {{ product.id }}</a>
+    <div class="row">
+        <div class="col-12">
+            <table>
+                <tr>
+                    <td>Названия</td>
+                    <td>{{ product.name }}</td>
+                </tr>
+                <tr>
+                    <td>Цена</td>
+                    <td>{{ product.price }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+
+{% endblock %}
