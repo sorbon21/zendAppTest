@@ -31,14 +31,12 @@ class SqlPaginator implements AdapterInterface
      */
     public function count()
     {
-        if(!$this->count)
+        if($this->count==0)
         {
             $sql = "SELECT COUNT(*) from ({$this->query->getSql()}) AS T";
             $db = $this->query->getEntityManager()->getConnection();
             $this->count = (int) $db->fetchColumn($sql);
         }
-
-
         return $this->count;
     }
 
