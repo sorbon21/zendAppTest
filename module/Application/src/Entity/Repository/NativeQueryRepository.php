@@ -12,9 +12,11 @@ class NativeQueryRepository extends RootRepository
 
     /**
      * @param null $user_id
-     * @return array
+     * @param $page
+     * @param $perpage
+     * @return Paginator
      */
-    public function getUsers($user_id=null): array
+    public function getUsers($user_id=null,$page,$perpage): Paginator
     {
 
         $rsm = new ResultSetMapping();
@@ -34,15 +36,16 @@ class NativeQueryRepository extends RootRepository
             $sqlNative.=" ORDER BY id";
             $query = $entityManager->createNativeQuery($sqlNative,$rsm);
         }
-
-        return  $query->getResult();
+        return $this->paginateSql($query,$page,$perpage);
     }
 
     /**
      * @param null $user_id
-     * @return array
+     * @param $page
+     * @param $perpage
+     * @return Paginator
      */
-    public function getProducts($user_id=null): array
+    public function getProducts($user_id=null,$page,$perpage): Paginator
     {
 
         $rsm = new ResultSetMapping();
@@ -71,14 +74,13 @@ class NativeQueryRepository extends RootRepository
                 $sqlNative.=" ORDER BY dt_created";
                 $query = $entityManager->createNativeQuery($sqlNative,$rsm);
             }
-
-        return  $query->getResult();
+        return $this->paginateSql($query,$page,$perpage);
     }
 
 
     /**
-
-     * @param array $params
+     * @param $page
+     * @param $perpage
      * @return Paginator
      */
     public function getLastUserProducts($page,$perpage): Paginator
